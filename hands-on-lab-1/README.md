@@ -8,12 +8,12 @@ The goal of the first hands-on lab is to familiarize you with Snowflake's web in
 ### 1. Sign in
 Open the browser and sign in to your Snowflake account:
 
-<img src="https://raw.githubusercontent.com/foprel/snowflake-101-training/main/images/sign-in.png?token=GHSAT0AAAAAABVAE32AR7A5FMF33NHVM2YGYWP373A" width="325">
+<img src="https://github.com/foprel/snowflake-101-training/blob/main/images/sign-in.png" width="325">
 
 ### 2. Explore key features
 The navigation bar on the left side of the screen shows Snowflake's main features. Click on each element to learn more about the features:
 
-<img src="https://raw.githubusercontent.com/foprel/snowflake-101-training/main/images/explore-features.png?token=GHSAT0AAAAAABVAE32BIKOW3H3DGNQDMCTGYWP4HMQ" width="200">
+<img src="https://github.com/foprel/snowflake-101-training/blob/main/images/explore-features.png" width="200">
 
 | Feature        	| Description                                                                                                                                     	|
 |----------------	|-------------------------------------------------------------------------------------------------------------------------------------------------	|
@@ -30,16 +30,16 @@ Virtual warehouses, often referred to as "warehouses", are a cluster of compute 
 
 ### 3.1 Navigate to warehouses
 
-<img src="https://raw.githubusercontent.com/foprel/snowflake-101-training/main/images/warehouses-nav.png?token=GHSAT0AAAAAABVAE32A4HUTLPFKYEYQEQG6YWP5FWQ" width="200">
+<img src="https://github.com/foprel/snowflake-101-training/blob/main/images/warehouses-nav.png" width="200">
 
 ### 3.2 Create a warehouse
 
-<img src="https://raw.githubusercontent.com/foprel/snowflake-101-training/main/images/warehouses-create.png?token=GHSAT0AAAAAABVAE32BQ5BWKZIE2EAPLJLYYWP5GSA" width="200">
+<img src="https://github.com/foprel/snowflake-101-training/blob/main/images/warehouses-create.png" width="200">
 
 
 ### 3.3 Explore warehouse options
 
-<img src="https://raw.githubusercontent.com/foprel/snowflake-101-training/main/images/warehouses-options.png?token=GHSAT0AAAAAABVAE32BU5G2DZGEE6TGGZXGYWP5ENQ" width="400">
+<img src="https://github.com/foprel/snowflake-101-training/blob/main/images/warehouses-options.png" width="400">
 
 
 
