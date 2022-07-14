@@ -1,1 +1,1 @@
-# Hands-on-lab-2
+# Hands-on lab 2
