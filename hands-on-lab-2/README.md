@@ -3,15 +3,15 @@
 ## Goal
 The goal of the second hand-ons excercise is to familiarize ourselves with creating and managing roles, database objects and virtual warehouses.
 
-### Step 1: Getting started
+### 1. Getting started
 Open a new worksheet. 
 
-### Step 2: Role creation
+### 2. Role creation
 create the roles of DATA_ENGINEER and DATA_ANALYST with the code down below.
 ~~~~
 create or replace role DATA_ENGINEER;
 ~~~~
-### Step 3: Database-objects 
+### 3. Database-objects 
 Next on we will create a example database, schema and table with the following code:
 ~~~~
 create or replace database EXAMPLE_DATABASE;
@@ -25,7 +25,7 @@ create or replace table EXAMPLE_DATABASE.EXAMPLE_SCHEMA.EXAMPLE_TABLE (
 ~~~~
 
 
-### Step 4: Virtual Warehouses
+### 4. Virtual Warehouses
 Now lets create two virtual warehouses, one for the data-analyst and one for the data-engineer:
 ~~~~
 create or replace warehouse ANALYST_WH
@@ -41,7 +41,7 @@ create or replace warehouse ENGINEER_WH
     max_cluster_count = 4
     warehouse_size = large;
 ~~~~
-### Step 5: Granting access
+###  5. Access management
 Next on we will grant access to the virtual warehouses created for our data-engineer and data-analyst:
 ~~~~
 grant all on warehouse COMPUTE_WH to role DATA_ANALYST;
@@ -49,14 +49,14 @@ grant all on warehouse ENGINEER_WH to role DATA_ANALYST;
 grant all on database EXAMPLE_DATABASE to role DATA_ANALYST;
 grant all on schema EXAMPLE_DATABASE.EXAMPLE_SCHEMA to role DATA_ANALYST;
 ~~~~
-### Step 6: Using the warehouses
+###  6. Using the warehouses
 If we now select the data engineer role we can use the warehouse we just created, try it yourselves! 
 ~~~~
 use role DATA_ENGINEER;
 
 use warehouse ENGINEER_WH;
 ~~~~
-### Step 7: Analysis 
+###  7. Data exploration 
 Let's now draw some basic information from the sample datasets already present in Snowflake. 
 
 An overview of the columns we will use can be created with the following code:
