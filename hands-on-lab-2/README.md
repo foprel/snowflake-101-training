@@ -4,7 +4,7 @@
 The goal of the second hand-ons excercise is to familiarize ourselves with creating and managing roles, database objects and virtual warehouses.
 
 ### 1. Getting started
-Open a new worksheet, as shown during the previous hands-on regarding the user interface. 
+Open a new worksheet, as shown during the previous hands-one. 
 
 ### 2. Role creation
 create the roles of DATA_ENGINEER and DATA_ANALYST with the code down below. Bonus points: try to add a description of the roles both for the data-engineer and data-analyst. 
