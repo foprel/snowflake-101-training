@@ -67,7 +67,7 @@ show columns in table SNOWFLAKE_SAMPLE_DATA.TPCDS_SF100TCL.ITEM;
 Now let's find the average and median price and count per product category:
 ~~~~
 select avg(I_CURRENT_PRICE), median(I_CURRENT_PRICE), count(I_CURRENT_PRICE), I_CATEGORY
-from SNOWFLAKE_SAMPLE_DATA.TPCDS_SF100TCL.ITEM
+from SNOWFLAKE_SAMPLE_DATA.TPCDS_SF100TCL.ITEM;
 ~~~~
 
 That's it for this hands-on! But if you have some left, feel free to explore the data further with the charts functionality present in the terminal. 
