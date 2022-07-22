@@ -7,7 +7,7 @@ The goal of the second hand-ons excercise is to familiarize ourselves with creat
 Open a new worksheet, as shown during the previous hands-on regarding the user interface. 
 
 ### 2. Role creation
-create the roles of DATA_ENGINEER and DATA_ANALYST with the code down below.
+create the roles of DATA_ENGINEER and DATA_ANALYST with the code down below. Bonus points: try to add a description of the roles both for the data-engineer and data-analyst. 
 ~~~~
 create or replace role DATA_ENGINEER;
 ~~~~
@@ -26,7 +26,7 @@ create or replace table EXAMPLE_DATABASE.EXAMPLE_SCHEMA.EXAMPLE_TABLE (
 
 
 ### 4. Virtual Warehouses
-Now lets create two virtual warehouses, one for the data-analyst and one for the data-engineer:
+Now lets create two virtual warehouses, one for the data-analyst and one for the data-engineer. With the parameters shown below you can edit the functionality as well as the size of the virtual warehouses. 
 ~~~~
 create or replace warehouse ANALYST_WH
     auto_suspend = 120
@@ -42,7 +42,7 @@ create or replace warehouse ENGINEER_WH
     warehouse_size = large;
 ~~~~
 ###  5. Access management
-Next on we will grant access to the virtual warehouses created for our data-engineer and data-analyst:
+Next on we will grant access to the virtual warehouses created for our data-engineer and data-analyst, with the following code you can edit who can acces which warehouses and database objects and to what extend. 
 ~~~~
 grant all on warehouse COMPUTE_WH to role DATA_ANALYST;
 grant all on warehouse ENGINEER_WH to role DATA_ANALYST;
