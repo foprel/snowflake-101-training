@@ -13,7 +13,7 @@ create the roles of DATA_ENGINEER and DATA_ANALYST with the code down below.
 
 ### Step 3: Database-objects 
 Next on we will create a example database, schema and table with the following code:
-
+```
 create or replace database EXAMPLE_DATABASE;
 
 create or replace schema EXAMPLE_DATABASE.EXAMPLE_SCHEMA;
@@ -22,6 +22,8 @@ create or replace table EXAMPLE_DATABASE.EXAMPLE_SCHEMA.EXAMPLE_TABLE (
     first_name string,
     last_name string
 );
+```
+
 
 ### Step 4: Virtual Warehouses
 Now lets create two virtual warehouses, one for the data-analyst and one for the data-engineer:
