@@ -1,7 +1,7 @@
 # Hands-on lab 1
 
 ## Goal
-The goal of the first hands-on lab is to familiarize you with Snowflake's web interface and to explore some of its core features. After this hands-on lab you should be able to name and locate Snowflake's core features.
+The goal of the first hands-on lab is to familiarize yourself with Snowflake's web interface and to explore some of its core features. After this hands-on lab you should be able to name and locate Snowflake's core features.
 
 ## Excercises
 

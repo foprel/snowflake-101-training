@@ -12,12 +12,20 @@ Open a new worksheet:
 ### 2. Create roles
 create the roles of DATA_ENGINEER and DATA_ANALYST with the code down below. 
 ```sql
+--Create roles
 create or replace role DATA_ENGINEER;
-
 create or replace role DATA_ANALYST;
+
+-- Assign roles to accountadmin
+grant role DATA_ENGINEER to role ACCOUNTADMIN;
+grant role DATA_ANALYST to role ACCOUNTADMIN;
+
+-- Assign roles to your user
+grant role DATA_ENGINEER to user <USER_NAME>;
+grant role DATA_ANALYST to user <USER_NAME>;
 ```
 
-Try to add a description of the roles both for the DATA_ENGINEER and DATA_ANALYST. Hint: you can use Snowflake's [documentation](https://docs.snowflake.com/en/sql-reference/sql/create-role.html) to find the right commmand. 
+Try to add a description of the roles both for the DATA_ENGINEER and DATA_ANALYST. Hint: you can use Snowflake's [documentation](https://docs.snowflake.com/en/sql-reference/sql/create-role.html) to find the right commmand.
 
 ### 3. Create database objects 
 Next, we will create an example database, schema and table with the following code:
@@ -27,7 +35,7 @@ create or replace database MARKETING;
 
 create or replace schema MARKETING.WEBSITE;
 
-create or replace table MARKETING.WEBSITES.EVENTS ( 
+create or replace table MARKETING.WEBSITE.EVENTS ( 
     id string,
     event_name string,
     event_type string,
@@ -62,19 +70,19 @@ Next, we will [grant privileges](https://docs.snowflake.com/en/sql-reference/sql
 ```sql
 -- Grant access to warehouses
 grant all on warehouse ANALYST_WH to role DATA_ANALYST;
-grant all on warehouse ENGINEER_WG to role DATA_EGINEER;
+grant all on warehouse ENGINEER_WH to role DATA_ENGINEER;
 
 -- Grant access to databases
-grant select on database MARKETING to role DATA_ANALYST;
-grant all on database MARKETING ro role DATA_ENGINEER;
+grant usage on database MARKETING to role DATA_ANALYST;
+grant all on database MARKETING to role DATA_ENGINEER;
 
 -- Grant access to schemas
-grant select on schema MARKETING.WEBSITE to role DATA_ANALYST;
-grant all on schema MARKETING.WEBSITE to role DATA_EGINEER;
+grant usage on schema MARKETING.WEBSITE to role DATA_ANALYST;
+grant all on schema MARKETING.WEBSITE to role DATA_ENGINEER;
 
 -- Grant access to tables
 grant select on table MARKETING.WEBSITE.EVENTS to role DATA_ANALYST;
-grant all on table MARKETING.WEBSITE.EVENTS to role DATA_ENGINEER;
+grant ownership on table MARKETING.WEBSITE.EVENTS to role DATA_ENGINEER;
 ```
 
 ###  6. Use the roles and warehouses
@@ -85,11 +93,11 @@ If we now select the DATA_ENGINEER role we can use the warehouse we have just cr
 use role DATA_ENGINEER;
 
 -- Select warehouse
-use warehouse DATA ENGINEER; 
+use warehouse ENGINEER_WH; 
 
 -- Alter table
-alter table MARKETING.WEBSTITE.EVENTS
-    rename event_page to event_url;
+alter table MARKETING.WEBSITE.EVENTS
+    rename column event_page to event_url;
 ```
 
 Try to perform the same alteration with the DATA_ANALYST role. Notice how you are not able to change the table because you have insufficient permissions.
@@ -106,12 +114,13 @@ show columns in table SNOWFLAKE_SAMPLE_DATA.TPCDS_SF100TCL.ITEM;
 Now let's find the average and median price and count per product category:
 
 ```sql
-select 
+select
+    I_CATEGORY,
     avg(I_CURRENT_PRICE),
     median(I_CURRENT_PRICE),
-    count(I_CURRENT_PRICE), 
-    I_CATEGORY
-from SNOWFLAKE_SAMPLE_DATA.TPCDS_SF100TCL.ITEM;
+    count(I_CURRENT_PRICE)
+from SNOWFLAKE_SAMPLE_DATA.TPCDS_SF100TCL.ITEM
+group by I_CATEGORY;
 ```
 
 That's it for Hands-On Lab #2. If you have some left, feel free to explore the data further with the charts functionality present in the Snowflake terminal. 

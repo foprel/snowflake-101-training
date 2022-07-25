@@ -5,16 +5,7 @@ The goal of this third hands-on lab is to familiarize you with some of Snowflake
 
 ## Excercises
 
-### 1. Get marketplace data 
-Snowflake has a large marketplace with free and/or paid datasets that you can use to augment your analyses. Navigate to the *Marketplace* using the left menu bar:
 
-<img src="https://github.com/foprel/snowflake-101-training/blob/main/images/marketplace.png" width="200">
-
-Search for the 'Economy Data Atlas' dataset from Knoema and click 'Get' on the right hand side of the screen:
-
-<img src="https://github.com/foprel/snowflake-101-training/blob/main/images/get-dataset.png" width="200">
-
-You do not have to change any of the options. Click 'Open' to open a new worksheet with the sample code.
 
 ### 2.
 
