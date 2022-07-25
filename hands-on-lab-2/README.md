@@ -37,9 +37,10 @@ create or replace schema MARKETING.WEBSITE;
 
 create or replace table MARKETING.WEBSITE.EVENTS ( 
     id string,
-    event_name string,
     event_type string,
     event_page string,
+    user_name string,
+    user_score int,
     event_timestamp timestamp
 );
 ```
@@ -56,7 +57,7 @@ create or replace warehouse ANALYST_WH
 create or replace warehouse ENGINEER_WH
     auto_suspend = 140
     scaling_policy = ECONOMY
-    auto_resume = FALSE
+    auto_resume = TRUE
     min_cluster_count = 2
     max_cluster_count = 4
     warehouse_size = large;

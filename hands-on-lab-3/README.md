@@ -1,87 +1,80 @@
 # Hands-on lab 3
 
 ## Goal
-The goal of this third hands-on lab is to familiarize you with some of Snowflake's unique features. In this lab you will learn how to get open-source data from the marketplace, to use zero-copy cloning to replicate data, to apply data masking to shield sensitive information and to handle semi-structured data.
+The goal of this third hands-on lab is to familiarize you with some of Snowflake's unique features. In this lab you will learn how to use zero-copy cloning to replicate data and to apply data masking to shield sensitive information.
 
-## Excercises
-
-
-
-### 2.
+### 1. Create dummy data
+We will create some dummy data for the purposes of the next excercises. You can use your previously created DATA_ENGINEER role and ENGINEER_WH for this:
 
 ```sql
-use role XYZ;
+-- Select role
+use role DATA_ENGINEER;
 
-create or replace table XYZ
-    clone ABC;
+-- Select warehouse
+use warehouse ENGINEER_WH;
+
+-- Insert values
+insert into MARKETING.WEBSITE.EVENTS
+  values
+  ('1', 'click', '/home', 'Frank', 10, to_timestamp('2013-05-08T23:39:20.123')),
+  ('2', 'click', '/work', 'Daan', 10, to_timestamp('2013-05-08T23:39:20.123')),
+  ('3', 'click', '/blog', 'Jeannine', 10, to_timestamp('2013-05-08T23:39:20.123'));
 ```
 
-### 3. Create and apply masking policies
+### 2. Create and apply masking policies
 Snowflake allows you to easily mask data for specific user roles. Use the following code to mask data for all roles except the DATAANALYST and DATAENGINEER roles.
 
 
-**3.1 Create a policy to mask a string field:**
 ```sql
+-- Use database
+use database MARKETING;
+
+-- Use schema
+use schema MARKETING.WEBSITE;
+
+-- Create masking policy for strings
 create or replace masking policy simple_mask_string as (val string) returns string ->
     case
-        when current_role() in ('DATAANALYST', 'DATAENGINEER') then val
+        when current_role() in ('DATA_ENGINEER') then val
         else '*** masked ***'
     end;
-```
-
-**3.2 Create a policy to mask an integer field:**
-```sql
+  
+-- Create masking policy for integers
 create or replace masking policy simple_mask_int as (val integer) returns integer ->
     case
-        when current_role() in ('DATAANALYST', 'DATAENGINEER') then val
+        when current_role() in ('DATA_ENGINEER') then val
         else -999
     end;
 ```
 
-**3.3 Apply the masking policies to certain columns in the table:**
+Apply the masking policy to columns of the EVENTS table:
 
 ```sql
-alter table XYZ modify
-    COLUMN_ABC set masking policy simple_mask_string,
-    COLUMN_DEF set masking policy simple_mask_int,
+alter table MARKETING.WEBSITE.EVENTS modify
+    user_name set masking policy simple_mask_string,
+    user_score set masking policy simple_mask_int,
 ```
 
-### 4. Handle semi-structured data
-Snowflake makes it easy to handle semi-structured data files, such as CSV, JSON, Avro and Parquet. Use the following code to load your first semi-structured data into snowflake:
+Try to switch to the DATA_ANALYST role and select data from the EVENTS table:
 
-**4.1 Load csv file into Snowflake**
 ```sql
-create or replace temporary table example_data (
-    abc string,
-    def string,
-    ghi string
-);
+grant select on table MARKETING.WEBSITE.EVENTS to role DATA_ANALYST;
+use role DATA_ANALYST;
+use warehouse ANALYST_WH;
+select * from MARKETING.WEBSITE.EVENTS;    
 ```
 
-**4.2 Create a new file format**
+Can you still see all the data? What happens if you try the same with the ACCOUNTADMIN role?
+
+### 3. Zero-copy clone the table
+Let's create a simple development environment based off the EVENTS table to see how zero-copy cloning works in practice.
+
 ```sql
-create or replace file format tutorial_csv
-    field_delimiter = ','
-    record_delimiter='\n';
+create or replace MARKETING.WEBSITE.DEV_EVENTS
+    clone MARKETING.WEBSITE.EVENTS;
 ```
 
-**4.3 Create temporary stage**
-```sql
-create or replace temporary stage tutorial_stage
-    file_format = tutorial_csv;
-```
+Notice how data is still masked 
+<img src="https://github.com/foprel/snowflake-101-training/blob/main/images/zero-copy-clone.png" width="400">
 
-**4.4 Stage the csv file**
-```sql
-PUT file://%TEMP%/tutorial_file.csv @tutorial_stage;
-```
 
-**4.5 Load the csv dat into a relational table**
-copy into tutorial_table(
-    abc,
-    def,
-    ghi
-)
-from (
-    select substr(parse_json($1))
-)
