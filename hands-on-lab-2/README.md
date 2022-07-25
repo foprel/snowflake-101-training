@@ -1,33 +1,45 @@
 # Hands-on lab 2
 
 ## Goal
-The goal of the second hand-ons excercise is to familiarize ourselves with creating and managing roles, database objects and virtual warehouses.
+The goal of the second hand-on lab is to familiarize yourself with creating and managing roles, database objects and virtual warehouses.
 
 ### 1. Getting started
-Open a new worksheet, as shown during the previous hands-one. 
+Open a new worksheet:
+
+<img src="https://github.com/foprel/snowflake-101-training/blob/main/images/worksheet-menu.png" width="325">
+<img src="https://github.com/foprel/snowflake-101-training/blob/main/images/worksheet-add.png" width="325">
 
 ### 2. Role creation
-create the roles of DATA_ENGINEER and DATA_ANALYST with the code down below. Bonus points: try to add a description of the roles both for the data-engineer and data-analyst. 
-~~~~
+create the roles of DATA_ENGINEER and DATA_ANALYST with the code down below. 
+```sql
 create or replace role DATA_ENGINEER;
-~~~~
+
+create or replace role DATA_ANALYST;
+```
+
+Try to add a description of the roles both for the DATA_ENGINEER and DATA_ANALYST. Hint: you can use Snowflake's [documentation](https://docs.snowflake.com/en/sql-reference/sql/create-role.html) to find the right commmand. 
+
 ### 3. Database-objects 
-Next on we will create a example database, schema and table with the following code:
-~~~~
-create or replace database EXAMPLE_DATABASE;
+Next, we will create an example database, schema and table with the following code:
 
-create or replace schema EXAMPLE_DATABASE.EXAMPLE_SCHEMA;
+```sql
+create or replace database MARKETING;
 
-create or replace table EXAMPLE_DATABASE.EXAMPLE_SCHEMA.EXAMPLE_TABLE ( 
-    first_name string,
-    last_name string
+create or replace schema MARKETING.WEBSITE;
+
+create or replace table MARKETING.WEBSITES.EVENTS ( 
+    id string,
+    event_name string,
+    event_type string,
+    event_page string,
+    event_timestamp timestamp
 );
-~~~~
-
+```
 
 ### 4. Virtual Warehouses
-Now lets create two virtual warehouses, one for the data-analyst and one for the data-engineer. With the parameters shown below you can edit the functionality as well as the size of the virtual warehouses. 
-~~~~
+Now let's create two Virtual Warehouses, one for the DATA_ENGINEER and one for the DATA_ANALYST role. With the parameters shown below you can edit the functionality as well as the size of the virtual warehouses: 
+
+```sql
 create or replace warehouse ANALYST_WH
     auto_suspend = 120
     auto_resume = TRUE
@@ -40,34 +52,64 @@ create or replace warehouse ENGINEER_WH
     min_cluster_count = 2
     max_cluster_count = 4
     warehouse_size = large;
-~~~~
+```
+
+Notice how you can create warehouses with specifications for different requirements. 
+
 ###  5. Access management
-Next on we will grant access to the virtual warehouses created for our data-engineer and data-analyst, with the following code you can edit who can acces which warehouses and database objects and to what extend. 
-~~~~
-grant all on warehouse COMPUTE_WH to role DATA_ANALYST;
-grant all on warehouse ENGINEER_WH to role DATA_ANALYST;
-grant all on database EXAMPLE_DATABASE to role DATA_ANALYST;
-grant all on schema EXAMPLE_DATABASE.EXAMPLE_SCHEMA to role DATA_ANALYST;
-~~~~
+Next, we will grant access to the Virtual Warehouses created for our DATA_ENGINEER and DATA_ANALYST roles. With the following code you can edit who can acces which warehouse and database objects and to what extent. 
+
+```sql
+-- Grant access to warehouses
+grant all on warehouse ANALYST_WH to role DATA_ANALYST;
+grant all on warehouse ENGINEER_WG to role DATA_EGINEER;
+
+-- Grant access to databases
+grant select on database MARKETING to role DATA_ANALYST;
+grant all on database MARKETING ro role DATA_ENGINEER;
+
+-- Grant access to schemas
+grant select on schema MARKETING.WEBSITE to role DATA_ANALYST;
+grant all on schema MARKETING.WEBSITE to role DATA_EGINEER;
+
+-- Grant access to tables
+grant select on table MARKETING.WEBSITE.EVENTS to role DATA_ANALYST;
+grant all on table MARKETING.WEBSITE.EVENTS to role DATA_ENGINEER;
+```
+
 ###  6. Using the warehouses
-If we now select the data engineer role we can use the warehouse we just created, try it yourselves! 
-~~~~
+If we now select the DATA_ENGINEER role we can use the warehouse we have just created. Let's try to alter a table using this role:
+
+```sql
+-- Select role
 use role DATA_ENGINEER;
 
-use warehouse ENGINEER_WH;
-~~~~
-###  7. Data exploration 
-Let's now draw some basic information from the sample datasets already present in Snowflake. 
+-- Select warehouse
+use warehouse DATA ENGINEER; 
 
-An overview of the columns we will use can be created with the following code:
-~~~~
+-- Alter table
+alter table MARKETING.WEBSTITE.EVENTS
+    rename event_page to event_url;
+```
+
+Try to perform the same alteration with the DATA_ANALYST role. Notice how you are not able to change the table because you have insufficient permissions.
+
+###  7. Data exploration 
+Let's now draw some basic information from a sample table already present in Snowflake. An overview of the columns we will use can be created with the following code:
+
+```sql
 show columns in table SNOWFLAKE_SAMPLE_DATA.TPCDS_SF100TCL.ITEM;
-~~~~
+```
 
 Now let's find the average and median price and count per product category:
-~~~~
-select avg(I_CURRENT_PRICE), median(I_CURRENT_PRICE), count(I_CURRENT_PRICE), I_CATEGORY
-from SNOWFLAKE_SAMPLE_DATA.TPCDS_SF100TCL.ITEM;
-~~~~
 
-That's it for this hands-on! But if you have some left, feel free to explore the data further with the charts functionality present in the terminal. 
+```sql
+select 
+    avg(I_CURRENT_PRICE),
+    median(I_CURRENT_PRICE),
+    count(I_CURRENT_PRICE), 
+    I_CATEGORY
+from SNOWFLAKE_SAMPLE_DATA.TPCDS_SF100TCL.ITEM;
+```
+
+That's it for Hands-On Lab #2. If you have some left, feel free to explore the data further with the charts functionality present in the Snowflake terminal. 
