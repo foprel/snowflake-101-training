@@ -3,13 +3,13 @@
 ## Goal
 The goal of the second hand-on lab is to familiarize yourself with creating and managing roles, database objects and virtual warehouses.
 
-### 1. Getting started
+### 1. Open a worksheet
 Open a new worksheet:
 
 <img src="https://github.com/foprel/snowflake-101-training/blob/main/images/worksheet-menu.png" width="325">
-<img src="https://github.com/foprel/snowflake-101-training/blob/main/images/worksheet-add.png" width="325">
+<img src="https://github.com/foprel/snowflake-101-training/blob/main/images/worksheet-add.png" width="200">
 
-### 2. Role creation
+### 2. Create roles
 create the roles of DATA_ENGINEER and DATA_ANALYST with the code down below. 
 ```sql
 create or replace role DATA_ENGINEER;
@@ -19,7 +19,7 @@ create or replace role DATA_ANALYST;
 
 Try to add a description of the roles both for the DATA_ENGINEER and DATA_ANALYST. Hint: you can use Snowflake's [documentation](https://docs.snowflake.com/en/sql-reference/sql/create-role.html) to find the right commmand. 
 
-### 3. Database-objects 
+### 3. Create database objects 
 Next, we will create an example database, schema and table with the following code:
 
 ```sql
@@ -36,8 +36,8 @@ create or replace table MARKETING.WEBSITES.EVENTS (
 );
 ```
 
-### 4. Virtual Warehouses
-Now let's create two Virtual Warehouses, one for the DATA_ENGINEER and one for the DATA_ANALYST role. With the parameters shown below you can edit the functionality as well as the size of the virtual warehouses: 
+### 4. Create virtual warehouses
+Now let's create two [virtual warehouses](https://docs.snowflake.com/en/sql-reference/sql/create-warehouse.html), one for the DATA_ENGINEER and one for the DATA_ANALYST role. With the parameters shown below you can edit the functionality as well as the size of the virtual warehouses: 
 
 ```sql
 create or replace warehouse ANALYST_WH
@@ -56,8 +56,8 @@ create or replace warehouse ENGINEER_WH
 
 Notice how you can create warehouses with specifications for different requirements. 
 
-###  5. Access management
-Next, we will grant access to the Virtual Warehouses created for our DATA_ENGINEER and DATA_ANALYST roles. With the following code you can edit who can acces which warehouse and database objects and to what extent. 
+###  5. Grant privileges
+Next, we will [grant privileges](https://docs.snowflake.com/en/sql-reference/sql/grant-privilege.html) to the virtual warehouses created for our DATA_ENGINEER and DATA_ANALYST roles. With the following code you can edit who can acces which warehouse and database objects and to what [extent](https://docs.snowflake.com/en/user-guide/security-access-control-privileges.html). 
 
 ```sql
 -- Grant access to warehouses
@@ -77,7 +77,7 @@ grant select on table MARKETING.WEBSITE.EVENTS to role DATA_ANALYST;
 grant all on table MARKETING.WEBSITE.EVENTS to role DATA_ENGINEER;
 ```
 
-###  6. Using the warehouses
+###  6. Use the roles and warehouses
 If we now select the DATA_ENGINEER role we can use the warehouse we have just created. Let's try to alter a table using this role:
 
 ```sql
@@ -94,8 +94,10 @@ alter table MARKETING.WEBSTITE.EVENTS
 
 Try to perform the same alteration with the DATA_ANALYST role. Notice how you are not able to change the table because you have insufficient permissions.
 
-###  7. Data exploration 
-Let's now draw some basic information from a sample table already present in Snowflake. An overview of the columns we will use can be created with the following code:
+###  7. Exploring data
+For the final part of this excercise, let's forget about the database objects we have just created. We will draw some information from a Snowflake sample table.
+
+An overview of the columns we will use can be created with the following code:
 
 ```sql
 show columns in table SNOWFLAKE_SAMPLE_DATA.TPCDS_SF100TCL.ITEM;
