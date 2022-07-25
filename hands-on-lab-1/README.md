@@ -28,20 +28,28 @@ The navigation bar on the left side of the screen shows Snowflake's main feature
 ### 3. Explore virtual warehouses
 Virtual warehouses, often referred to as "warehouses", are a cluster of compute resources that can be easily scaled up, down, in and out.
 
-### 3.1 Navigate to warehouses
+Navigate to warehouses:
 
 <img src="https://github.com/foprel/snowflake-101-training/blob/main/images/warehouses-nav.png" width="200">
 
-### 3.2 Create a warehouse
+Create a warehouse:
 
 <img src="https://github.com/foprel/snowflake-101-training/blob/main/images/warehouses-create.png" width="200">
 
-
-### 3.3 Explore warehouse options
+Explore warehouse option:
 
 <img src="https://github.com/foprel/snowflake-101-training/blob/main/images/warehouses-options.png" width="400">
 
+### 4. Get marketplace data 
+Snowflake has a large marketplace with free and/or paid datasets that you can use to augment your analyses. Navigate to the *Marketplace* using the left menu bar:
 
+<img src="https://github.com/foprel/snowflake-101-training/blob/main/images/marketplace.png" width="200">
+
+Search for the 'Economy Data Atlas' dataset from Knoema and click 'Get' on the right hand side of the screen:
+
+<img src="https://github.com/foprel/snowflake-101-training/blob/main/images/get-dataset.png" width="200">
+
+You do not have to change any of the options. Click 'Open' to open a new worksheet with the sample code. You can now start exploring the data by running the sample code or writign your own queries.
 
 
 
