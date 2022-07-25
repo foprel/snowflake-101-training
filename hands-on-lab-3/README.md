@@ -52,7 +52,7 @@ Apply the masking policy to columns of the EVENTS table:
 ```sql
 alter table MARKETING.WEBSITE.EVENTS modify
     user_name set masking policy simple_mask_string,
-    user_score set masking policy simple_mask_int,
+    user_score set masking policy simple_mask_int;
 ```
 
 Try to switch to the DATA_ANALYST role and select data from the EVENTS table:
@@ -67,14 +67,15 @@ select * from MARKETING.WEBSITE.EVENTS;
 Can you still see all the data? What happens if you try the same with the ACCOUNTADMIN role?
 
 ### 3. Zero-copy clone the table
-Let's create a simple development environment based off the EVENTS table to see how zero-copy cloning works in practice.
+Let's create a simple development environment based on the EVENTS table to see how zero-copy cloning works in practice.
 
 ```sql
 create or replace MARKETING.WEBSITE.DEV_EVENTS
     clone MARKETING.WEBSITE.EVENTS;
 ```
 
-Notice how data is still masked 
+Notice how data is still masked:
+
 <img src="https://github.com/foprel/snowflake-101-training/blob/main/images/zero-copy-clone.png" width="400">
 
 
