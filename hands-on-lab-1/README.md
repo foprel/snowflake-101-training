@@ -49,7 +49,7 @@ Search for the 'Economy Data Atlas' dataset from Knoema and click 'Get' on the r
 
 <img src="https://github.com/foprel/snowflake-101-training/blob/main/images/get-dataset.png" width="200">
 
-You do not have to change any of the options. Click 'Open' to open a new worksheet with the sample code. You can now start exploring the data by running the sample code or writign your own queries.
+You do not have to change any of the options. Click 'Open' to open a new worksheet with the sample code. You can now start exploring the data by running the sample code or writing your own queries.
 
 
 
