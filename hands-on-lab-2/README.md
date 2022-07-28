@@ -82,8 +82,8 @@ grant usage on schema MARKETING.WEBSITE to role DATA_ANALYST;
 grant all on schema MARKETING.WEBSITE to role DATA_ENGINEER;
 
 -- Grant access to tables
-grant select on table MARKETING.WEBSITE.EVENTS to role DATA_ANALYST;
 grant ownership on table MARKETING.WEBSITE.EVENTS to role DATA_ENGINEER;
+grant select on table MARKETING.WEBSITE.EVENTS to role DATA_ANALYST;
 ```
 
 ###  6. Use the roles and warehouses
