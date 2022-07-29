@@ -17,8 +17,8 @@ create or replace role DATA_ENGINEER;
 create or replace role DATA_ANALYST;
 
 -- Assign roles to accountadmin
-grant role DATA_ENGINEER to role ACCOUNTADMIN;
-grant role DATA_ANALYST to role ACCOUNTADMIN;
+grant role DATA_ENGINEER to role SYSADMIN;
+grant role DATA_ANALYST to role SYSADMIN;
 
 -- Assign roles to your user
 grant role DATA_ENGINEER to user <USER_NAME>;
@@ -102,26 +102,3 @@ alter table MARKETING.WEBSITE.EVENTS
 ```
 
 Try to perform the same alteration with the DATA_ANALYST role. Notice how you are not able to change the table because you have insufficient permissions.
-
-###  7. Exploring data
-For the final part of this excercise, let's forget about the database objects we have just created. We will draw some information from a Snowflake sample table.
-
-An overview of the columns we will use can be created with the following code:
-
-```sql
-show columns in table SNOWFLAKE_SAMPLE_DATA.TPCDS_SF100TCL.ITEM;
-```
-
-Now let's find the average and median price and count per product category:
-
-```sql
-select
-    I_CATEGORY,
-    avg(I_CURRENT_PRICE),
-    median(I_CURRENT_PRICE),
-    count(I_CURRENT_PRICE)
-from SNOWFLAKE_SAMPLE_DATA.TPCDS_SF100TCL.ITEM
-group by I_CATEGORY;
-```
-
-That's it for Hands-On Lab #2. If you have some left, feel free to explore the data further with the charts functionality present in the Snowflake terminal. 
