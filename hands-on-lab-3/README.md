@@ -16,10 +16,12 @@ use warehouse ENGINEER_WH;
 -- Insert values
 insert into MARKETING.WEBSITE.EVENTS
   values
-  ('1', 'click', '/home', 'Frank', 10, to_timestamp('2013-05-08T23:39:20.123')),
+  ('1', 'click', '/home', 'Kevin', 10, to_timestamp('2013-05-08T23:39:20.123')),
   ('2', 'click', '/work', 'Daan', 10, to_timestamp('2013-05-08T23:39:20.123')),
   ('3', 'click', '/blog', 'Jeannine', 10, to_timestamp('2013-05-08T23:39:20.123'));
 ```
+
+Click on `Databases > MARKETING > WEBSITE > Tables > EVENTS` to review your inserts.
 
 ### 2. Create and apply masking policies
 Snowflake allows you to easily mask data for specific user roles. Use the following code to mask data for all roles except the DATAANALYST and DATAENGINEER roles.
@@ -70,6 +72,10 @@ Can you still see all the data? What happens if you try the same with the ACCOUN
 Let's create a simple development environment based on the EVENTS table to see how zero-copy cloning works in practice.
 
 ```sql
+use role DATA_ENGINEER;
+
+use warehouse ENGINEER_WH;
+
 create or replace table MARKETING.WEBSITE.DEV_EVENTS
     clone MARKETING.WEBSITE.EVENTS;
 ```

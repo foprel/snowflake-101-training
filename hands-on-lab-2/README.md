@@ -27,6 +27,10 @@ grant role DATA_ANALYST to user <USER_NAME>;
 
 Try to add a description of the roles both for the DATA_ENGINEER and DATA_ANALYST. Hint: you can use Snowflake's [documentation](https://docs.snowflake.com/en/sql-reference/sql/create-role.html) to find the right commmand.
 
+Go to `Admin > Users & Roles > Roles` to review your new role hierarchy. Notice how DATA_ANALYST and DATA_ENGINEER roles are nested under SYSADMIN:
+
+<img src="https://github.com/foprel/snowflake-101-training/blob/main/images/users-roles.png" width="400">
+
 ### 3. Create database objects 
 Next, we will create an example database, schema and table with the following code:
 
@@ -44,6 +48,8 @@ create or replace table MARKETING.WEBSITE.EVENTS (
     event_timestamp timestamp
 );
 ```
+
+Click `Databases` to review your newly created database, schema and table. Hint: you may have to refresh your browser window.
 
 ### 4. Create virtual warehouses
 Now let's create two [virtual warehouses](https://docs.snowflake.com/en/sql-reference/sql/create-warehouse.html), one for the DATA_ENGINEER and one for the DATA_ANALYST role. With the parameters shown below you can edit the functionality as well as the size of the virtual warehouses: 
@@ -100,5 +106,9 @@ use warehouse ENGINEER_WH;
 alter table MARKETING.WEBSITE.EVENTS
     rename column event_page to event_url;
 ```
+
+Click on `Databases > MARKETING > WEBSITE > Tables > EVENTS` to review your changes.
+
+Try to figure out if there is another way to use the DATA_ENGINEER role with the ENGINEER_WH.
 
 Try to perform the same alteration with the DATA_ANALYST role. Notice how you are not able to change the table because you have insufficient permissions.
