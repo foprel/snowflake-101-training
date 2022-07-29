@@ -70,7 +70,7 @@ Can you still see all the data? What happens if you try the same with the ACCOUN
 Let's create a simple development environment based on the EVENTS table to see how zero-copy cloning works in practice.
 
 ```sql
-create or replace MARKETING.WEBSITE.DEV_EVENTS
+create or replace table MARKETING.WEBSITE.DEV_EVENTS
     clone MARKETING.WEBSITE.EVENTS;
 ```
 
