@@ -29,7 +29,7 @@ Try to add a description of the roles both for the DATA_ENGINEER and DATA_ANALYS
 
 Go to `Admin > Users & Roles > Roles` to review your new role hierarchy. Notice how DATA_ANALYST and DATA_ENGINEER roles are nested under SYSADMIN:
 
-<img src="https://github.com/foprel/snowflake-101-training/blob/main/images/user-roles.png" width="400">
+<img src="https://github.com/foprel/snowflake-101-training/blob/main/images/user-roles.PNG" width="400">
 
 ### 3. Create database objects 
 Next, we will create an example database, schema and table with the following code:
